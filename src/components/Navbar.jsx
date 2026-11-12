@@ -1,3 +1,4 @@
+import vivekLogo from '../assets/images/vivek-logo.png';
 import { useState, useEffect } from 'react';
 import { Menu, X, FileText, Github, Sun, Moon } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData.js';
@@ -62,9 +63,11 @@ export default function Navbar({ onOpenCv, theme, toggleTheme }) {
           }}
           className="flex items-center gap-2.5 text-lg font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap shrink-0 group font-['Outfit',sans-serif]"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-            V
-          </div>
+          <img
+  src={vivekLogo}
+  alt="Website by Vivek"
+  className="w-12 h-12 object-contain rounded-lg bg-white p-1 shadow-md group-hover:scale-110 transition-transform duration-300"
+/>
           <span>
             M. Vivek<span className="text-cyan-500 dark:text-cyan-400">.</span>
           </span>
