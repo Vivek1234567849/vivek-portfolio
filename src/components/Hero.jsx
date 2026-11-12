@@ -6,6 +6,7 @@ export default function Hero({ mousePosition, onOpenCv, theme = 'dark' }) {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
 
   // Animated metric counters
   const [counts, setCounts] = useState({ projects: 0, tech: 0, semester: 0 });
@@ -197,13 +198,19 @@ export default function Hero({ mousePosition, onOpenCv, theme = 'dark' }) {
               {/* Profile Card Header with Avatar & Online Status */}
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-cyan-500/50 shadow-md">
-                    <img
-                      src={personalInfo.avatar}
-                      alt="M. Vivek"
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-cyan-500/50 shadow-md bg-slate-900 flex items-center justify-center">
+                    {!avatarError && personalInfo.avatar ? (
+                      <img
+                        src={personalInfo.avatar}
+                        alt="M. Vivek"
+                        onError={() => setAvatarError(true)}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-['Outfit',sans-serif] select-none">
+                        MV
+                      </span>
+                    )}
                   </div>
                   <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900" title="Online & Available" />
                 </div>

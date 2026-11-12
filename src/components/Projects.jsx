@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Github, ExternalLink, Eye, CheckCircle2, X } from 'lucide-react';
+import { Github, ExternalLink, Eye, CheckCircle2, X, Code2 } from 'lucide-react';
 import { projects } from '../data/portfolioData.js';
 import { useTilt } from '../hooks/useTilt.js';
 
 function ProjectCard({ project, onSelect }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(8);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div
@@ -17,13 +18,22 @@ function ProjectCard({ project, onSelect }) {
       <div>
         {/* Project Thumbnail with Zoom & Overlay */}
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity" />
+          {!imgError && project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              onError={() => setImgError(true)}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0a1628] to-slate-950 p-4 text-center">
+              <Code2 className="w-8 h-8 text-cyan-400 mb-2" />
+              <span className="text-sm font-semibold text-white font-['Outfit',sans-serif]">
+                {project.title}
+              </span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity pointer-events-none" />
 
           {/* Category Tag */}
           <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-950/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-cyan-700 dark:text-cyan-300 shadow-sm">
@@ -85,6 +95,26 @@ function ProjectCard({ project, onSelect }) {
           <span>GitHub</span>
         </a>
       </div>
+    </div>
+  );
+}
+
+function ProjectModalImage({ project }) {
+  const [modalImgError, setModalImgError] = useState(false);
+  if (!modalImgError && project.image) {
+    return (
+      <img
+        src={project.image}
+        alt={project.title}
+        onError={() => setModalImgError(true)}
+        className="w-full h-full object-cover"
+      />
+    );
+  }
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0a1628] to-slate-950 p-6 text-center">
+      <Code2 className="w-10 h-10 text-cyan-400 mb-2" />
+      <span className="text-base font-bold text-white font-['Outfit',sans-serif]">{project.title}</span>
     </div>
   );
 }
@@ -155,12 +185,7 @@ export default function Projects() {
         >
           <div className="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden my-8">
             <div className="relative aspect-[16/9] bg-slate-950">
-              <img
-                src={activeProject.image}
-                alt={activeProject.title}
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
+              <ProjectModalImage key={activeProject.id} project={activeProject} />
               <button
                 onClick={() => setActiveProject(null)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-slate-950/80 border border-slate-800 text-slate-300 hover:text-white transition-colors cursor-pointer"

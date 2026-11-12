@@ -3,6 +3,11 @@
  * Full-Stack Developer
  */
 
+import avatarImg from '../assets/images/avatar_developer_vivek_1794162790912.jpg';
+import petCareImg from '../assets/images/project_pet_care_1794162788125.jpg';
+import olympicSportsImg from '../assets/images/project_olympic_sports_1794162789477.jpg';
+import ecommerceStoreImg from '../assets/images/project_ecommerce_store_1794162790018.jpg';
+
 export const personalInfo = {
   name: "M. Vivek",
   role: "Full-Stack Developer",
@@ -12,7 +17,7 @@ export const personalInfo = {
   email: "medeveloperking@gmail.com",
   github: "https://github.com/Vivek12345678949",
   githubUsername: "Vivek12345678949",
-  avatar: "/src/assets/images/avatar_developer_vivek_1794162790912.jpg",
+  avatar: avatarImg,
   bio: "Motivated Full-Stack Web Developer currently pursuing Software Engineering at Aptech. Skilled in building modern, responsive web applications using HTML5, CSS3, Bootstrap, JavaScript, React.js, Laravel, ASP.NET Core MVC, C#, SQL Server, and MySQL.",
   aboutQuote: "I'm a passionate Full-Stack Developer currently pursuing Software Engineering at Aptech. I enjoy building responsive web applications, solving real-world problems, and continuously improving my development skills.",
   corePillars: [
@@ -51,7 +56,7 @@ export const projects = [
     title: "Pet Care Website",
     category: "Frontend Development",
     technologies: ["HTML", "CSS", "Bootstrap", "JavaScript"],
-    image: "/src/assets/images/project_pet_care_1794162788125.jpg",
+    image: petCareImg,
     description: "Designed a fully responsive pet care website with homepage, booking, gallery, and contact page. Optimized for desktop, tablet, and mobile devices.",
     details: [
       "Intuitive veterinary & grooming appointment booking form with instant validation",
@@ -66,7 +71,7 @@ export const projects = [
     title: "Olympic Sports Website",
     category: "Frontend Development",
     technologies: ["HTML", "CSS", "Bootstrap", "JavaScript"],
-    image: "/src/assets/images/project_olympic_sports_1794162789477.jpg",
+    image: olympicSportsImg,
     description: "Developed a responsive Olympic-themed website featuring athlete profiles, sports categories, medal tables, and event schedules.",
     details: [
       "Dynamic medal tally leaderboard with filterable nation standings",
@@ -81,7 +86,7 @@ export const projects = [
     title: "E-Commerce Store",
     category: "Full-Stack Development",
     technologies: ["ASP.NET Core MVC", "C#", "SQL Server"],
-    image: "/src/assets/images/project_ecommerce_store_1794162790018.jpg",
+    image: ecommerceStoreImg,
     description: "Developed an online shopping platform with product catalog, search and filtering, shopping cart, checkout, authentication, role-based access, and admin panel.",
     details: [
       "Robust ASP.NET Core MVC architecture with repository pattern and Entity Framework",

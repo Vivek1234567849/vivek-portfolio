@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Layers, Layout, Server, Database, MapPin, GraduationCap, CheckCircle2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData.js';
 import { useTilt } from '../hooks/useTilt.js';
+import profileImage from '../assets/images/avatar_developer_vivek_1794162790912.jpg';
 
 function PillarCard({ pillar, index }) {
   const { ref, style, onMouseMove, onMouseLeave } = useTilt(10);
@@ -41,6 +43,8 @@ function PillarCard({ pillar, index }) {
 }
 
 export default function About() {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <section id="about" className="py-24 relative overflow-hidden bg-slate-50/70 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -65,13 +69,27 @@ export default function About() {
               <div className="relative group">
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 opacity-20 dark:opacity-30 group-hover:opacity-50 blur-md transition duration-500" />
                 <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 shadow-xl">
-                  <img
-                    src={personalInfo.avatar}
-                    alt="M. Vivek Portrait"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  {!imgError && profileImage ? (
+                    <img
+                      src={profileImage}
+                      alt="M. Vivek Portrait"
+                      onError={() => setImgError(true)}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0a1628] to-slate-950 transition-transform duration-500 group-hover:scale-105 select-none"
+                      aria-label="M. Vivek Initials Placeholder"
+                    >
+                      <span className="text-5xl sm:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 font-['Outfit',sans-serif]">
+                        MV
+                      </span>
+                      <span className="text-[10px] font-mono text-cyan-400/80 uppercase tracking-widest mt-1">
+                        Full-Stack
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-2 left-2 right-2 px-2 py-1 bg-slate-900/80 backdrop-blur-sm rounded-lg text-[11px] text-center font-mono text-cyan-300 border border-cyan-500/30">
                     M. Vivek · Full-Stack Dev
                   </div>
